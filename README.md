@@ -2,7 +2,7 @@
 
 A lightweight and responsive Single Page Application (SPA) for daily task management. This project demonstrates Angular standalone components, Signals, and centralized state management with NgRx.
 
-🔗 Live Demo: soon
+🔗 Live Demo: angular-ngrx-todo.netlify.app
 
 🔗 Repository: https://github.com/vadimkosenkov/react-crypto
 
