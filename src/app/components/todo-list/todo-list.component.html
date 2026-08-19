@@ -1,0 +1,90 @@
+<div class="flex flex-col gap-5">
+  <!-- Add task form -->
+  <form (submit)="$event.preventDefault(); addTodo()" class="flex flex-col gap-1.5">
+    <div class="flex gap-2">
+      <input
+        type="text"
+        [value]="newTitle()"
+        (input)="onTitleInput($any($event.target).value)"
+        placeholder="What needs to be done?"
+        class="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-800 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-indigo-500 dark:focus:ring-indigo-950"
+        [attr.aria-invalid]="!!validationError()"
+      />
+      <button
+        type="submit"
+        aria-label="Add task"
+        class="flex shrink-0 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-indigo-500 active:scale-95"
+      >
+        <ng-icon name="heroPlus" size="16" />
+        <span class="hidden sm:inline">Add</span>
+      </button>
+    </div>
+    @if (validationError()) {
+      <p class="pl-1 text-xs font-medium text-red-500">{{ validationError() }}</p>
+    }
+  </form>
+
+  <!-- Filter tabs -->
+  <div class="flex gap-1.5 rounded-xl bg-slate-100 p-1 dark:bg-slate-900">
+    @for (item of filters; track item.value) {
+      <button
+        type="button"
+        (click)="setFilter(item.value)"
+        class="flex-1 rounded-lg py-1.5 text-sm font-medium transition"
+        [class.bg-white]="filter() === item.value"
+        [class.dark:bg-slate-700]="filter() === item.value"
+        [class.text-indigo-600]="filter() === item.value"
+        [class.dark:text-indigo-300]="filter() === item.value"
+        [class.shadow-sm]="filter() === item.value"
+        [class.text-slate-500]="filter() !== item.value"
+        [class.dark:text-slate-400]="filter() !== item.value"
+      >
+        {{ item.label }}
+      </button>
+    }
+  </div>
+
+  <!-- Task list -->
+  @if (loading()) {
+    <div class="flex flex-col gap-2">
+      @for (i of [1, 2, 3]; track i) {
+        <div class="h-14 animate-pulse rounded-xl bg-slate-100 dark:bg-slate-800"></div>
+      }
+    </div>
+  } @else if (todos().length === 0) {
+    <div class="flex flex-col items-center gap-3 rounded-xl border border-dashed border-slate-200 py-12 text-center dark:border-slate-700">
+      <ng-icon name="heroClipboardDocumentList" size="36" class="text-slate-300 dark:text-slate-600" />
+      <p class="text-sm text-slate-400 dark:text-slate-500">
+        @if (filter() === 'completed') {
+          No completed tasks yet.
+        } @else if (filter() === 'active') {
+          Nothing left to do. Nice work!
+        } @else {
+          Your list is empty. Add your first task above.
+        }
+      </p>
+    </div>
+  } @else {
+    <ul class="flex flex-col gap-2">
+      @for (todo of todos(); track todo.id) {
+        <app-todo-item [todo]="todo" (toggled)="toggleTodo($event)" (remove)="removeTodo($event)" />
+      }
+    </ul>
+  }
+
+  <!-- Counters -->
+  @if (counts().total > 0) {
+    <div class="flex items-center justify-between border-t border-slate-200 pt-4 text-xs text-slate-500 dark:border-slate-800 dark:text-slate-400">
+      <span>{{ counts().total }} total &middot; {{ counts().active }} active &middot; {{ counts().completed }} completed</span>
+      @if (counts().completed > 0) {
+        <button
+          type="button"
+          (click)="clearCompleted()"
+          class="font-medium text-indigo-600 transition hover:text-indigo-500 dark:text-indigo-400"
+        >
+          Clear completed
+        </button>
+      }
+    </div>
+  }
+</div>
