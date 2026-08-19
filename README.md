@@ -1,8 +1,10 @@
-# angular-ngrx-todo
+# 📝 Angular NgRx ToDo (Task Management App)
 
-A todo list app built with Angular 21 (standalone components, Signals), NgRx (store/effects/devtools), and Tailwind CSS 4.
+A lightweight and responsive Single Page Application (SPA) for daily task management. This project demonstrates Angular standalone components, Signals, and centralized state management with NgRx.
 
-## Features
+---
+
+## ✨ Features
 
 - Add, remove, and toggle todos, with non-empty validation
 - Filter by all / active / completed
@@ -12,25 +14,40 @@ A todo list app built with Angular 21 (standalone components, Signals), NgRx (st
 - Light/dark theme toggle (respects system preference, persisted)
 - Responsive, mobile-first layout
 
-## Getting started
+---
 
+## 🛠️ Tech Stack
+
+### Frontend Core
+- **Framework:** Angular 21 (standalone components & Signals for local state)
+- **State Management:** NgRx (Store, Effects, Store DevTools)
+- **Styling:** Tailwind CSS 4
+- **Icons:** ng-icons (Heroicons)
+- **Build Tool:** Angular CLI
+
+### Testing
+- Karma / Jasmine (unit tests)
+- ESLint (angular-eslint)
+
+---
+
+## ⚙️ Quick Start
+
+Follow these steps to explore the app locally.
+
+### 1. Clone the repository
 ```bash
-npm install
-npm start
+git clone https://github.com/vadimkosenkov/angular-ngrx-todo.git
+cd angular-ngrx-todo
 ```
 
-Then open http://localhost:4200.
+### 2. Install dependencies
+```bash
+npm install
+```
 
-## Scripts
-
-- `npm start` — dev server
-- `npm run build` — production build
-- `npm test` — unit tests (Vitest)
-- `npm run lint` — ESLint (angular-eslint)
-
-## Project structure
-
-- `src/app/models/` — `Todo` data model
-- `src/app/services/todo.service.ts` — localStorage + seed-API access
-- `src/app/store/todo/` — NgRx actions, reducer, selectors, effects
-- `src/app/components/` — `todo-list`, `todo-item`, `theme-toggle`
+### 3. Start the application
+```bash
+npm start
+```
+Open `http://localhost:4200` in your browser to see the app.
