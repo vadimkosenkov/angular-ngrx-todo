@@ -2,6 +2,16 @@
 
 A lightweight and responsive Single Page Application (SPA) for daily task management. This project demonstrates Angular standalone components, Signals, and centralized state management with NgRx.
 
+🔗 Live Demo: soon
+
+🔗 Repository: https://github.com/vadimkosenkov/react-crypto
+
+---
+
+## 📸 Preview
+
+![angular todo Preview](https://github.com/user-attachments/assets/6cb223bb-c4c2-48b9-9ba3-6830a201404c)
+
 ---
 
 ## ✨ Features
